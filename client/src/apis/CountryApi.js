@@ -8,3 +8,19 @@ export const getCountry = () => {
     });
   };
 };
+
+export const AddCountry = (data) => {
+  return (dispatch) => {
+    axios.post("http://localhost:5000/api/addcountry", data).then((res) => {
+      dispatch(fillTextAction(res.data));
+    });
+  };
+};
+
+export const deleteCountry = (id) => {
+  return (dispatch) => {
+    axios.delete(`http://localhost:5000/api/countrydel/${id}`).then((res) => {
+      dispatch(fillTextAction(res.data));
+    });
+  };
+};

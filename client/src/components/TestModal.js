@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@mui/material/Button";
@@ -8,8 +9,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { AddCountry, getCountry } from "../apis/CountryApi";
 
 function TestModal(props) {
+  const dispatch = useDispatch();
   const { open, setOpen } = props;
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,15 +29,17 @@ function TestModal(props) {
       flag: "",
     },
     validationSchema: yup.object({
-      countryName: yup.string().required("countryName is required"),
-      countryCode: yup.string().required("countryCode is required"),
-      flag: yup.string().required("flag is required"),
+      countryName: yup.string().required("Country is required"),
+      countryCode: yup.string().required("Code is required"),
+      flag: yup.string().required("Flag is required"),
     }),
     onSubmit: async (data) => {
       console.log(data);
+      dispatch(AddCountry(data));
+      dispatch(getCountry());
+      window.location.reload();
     },
   });
-
   return (
     <div>
       <Button
@@ -45,11 +50,11 @@ function TestModal(props) {
         Add Country
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>NATO OTAN</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
+            The Secretary General. Jens Stoltenberg. Biography of NATO Secretary
+            General Jens Stoltenberg ·
           </DialogContentText>
           <TextField
             autoFocus
@@ -61,6 +66,12 @@ function TestModal(props) {
             variant="standard"
             value={formik.values.countryName}
             onChange={formik.handleChange}
+            helperText={
+              formik.touched.countryName ? formik.errors.countryName : null
+            }
+            error={
+              formik.touched.countryName ? formik.errors.countryName : null
+            }
           />
           <TextField
             autoFocus
@@ -72,17 +83,25 @@ function TestModal(props) {
             variant="standard"
             value={formik.values.countryCode}
             onChange={formik.handleChange}
+            helperText={
+              formik.touched.countryCode ? formik.errors.countryCode : null
+            }
+            error={
+              formik.touched.countryCode ? formik.errors.countryCode : null
+            }
           />
           <TextField
             autoFocus
             margin="dense"
             id="flag"
-            label="flag url"
+            label="Flag url"
             type="text"
             fullWidth
             variant="standard"
             value={formik.values.flag}
             onChange={formik.handleChange}
+            helperText={formik.touched.flag ? formik.errors.flag : null}
+            error={formik.touched.flag ? formik.errors.flag : null}
           />
         </DialogContent>
         <DialogActions>
