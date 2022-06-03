@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const countrySlice = createSlice({
   name: "country",
   initialState: {
-    fillText: [],
+    data: [],
   },
 
   reducers: {
     fillTextAction: (state, { payload }) => {
-      state.fillText = payload;
+      state.data = payload;
     },
   },
 });
