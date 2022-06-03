@@ -23,7 +23,6 @@ Route.post("/addcountry", async (req, res) => {
   } catch (err) {
     res.status(400).json(err);
   }
-  res.json(countryData);
 });
 
 Route.get("/allcountries", async (req, res) => {
