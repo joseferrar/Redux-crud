@@ -42,15 +42,11 @@ function TestModal(props) {
   });
   return (
     <div>
-      <Button
-        variant="contained"
-        onClick={handleClickOpen}
-        style={{ marginLeft: "auto" }}
-      >
+      <Button variant="contained" onClick={handleClickOpen} style={{ top: 40 }}>
         Add Country
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>NATO OTAN</DialogTitle>
+        <DialogTitle>Add Country</DialogTitle>
         <DialogContent>
           <DialogContentText>
             The Secretary General. Jens Stoltenberg. Biography of NATO Secretary

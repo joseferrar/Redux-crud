@@ -9,14 +9,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { getCountry, deleteCountry } from "../apis/CountryApi";
+import TextField from "@mui/material/TextField";
+import { getCountry, deleteCountry, searchCountry } from "../apis/CountryApi";
 import TestModal from "./TestModal";
 
 function TestComponent() {
+  const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
   const data = useSelector((state) => state.country);
+
+  const onChangeSearch = (event) => {
+    event.preventDefault();
+    dispatch(searchCountry(event.target.value));
+    setSearch(event.target.value);
+  };
 
   useEffect(() => {
     dispatch(getCountry());
@@ -25,9 +33,18 @@ function TestComponent() {
   return (
     <div>
       <TestModal open={open} setOpen={setOpen} />
+
       <div style={{ marginLeft: 50, marginRight: 50, marginTop: 50 }}>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableContainer component={Paper} style={{ maxWidth: 1000 }}>
+          <TextField
+            id="input-with-sx"
+            label="Search"
+            variant="filled"
+            style={{ backgroundColor: "white", marginLeft: 737 }}
+            value={search}
+            onChange={onChangeSearch}
+          />
+          <Table style={{ width: 1000 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>Flag</TableCell>

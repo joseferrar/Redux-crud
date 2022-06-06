@@ -40,4 +40,15 @@ Route.delete("/countrydel/:id", async (req, res) => {
   res.json(delCountry);
 });
 
+Route.get("/searchCountry", async (req, res) => {
+  const searchedField = req.query.countryName;
+  countrySchema
+    .find({
+      countryName: { $regex: searchedField, $options: "$id" },
+    })
+    .then((result) => {
+      res.json(result);
+    });
+});
+
 module.exports = Route;

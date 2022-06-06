@@ -24,3 +24,11 @@ export const deleteCountry = (id) => {
     });
   };
 };
+
+export const searchCountry = (name) => {
+  return (dispatch) => {
+    axios.get(`http://localhost:5000/api/searchCountry?countryName=${name}`).then((res) => {
+      dispatch(fillTextAction(res.data));
+    });
+  };
+};
