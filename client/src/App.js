@@ -5,7 +5,6 @@ import "./App.css";
 import TestComponent from "./components/TestComponent";
 
 function App() {
-console.log(process.env)
 
   return (
     <Provider store={store}>

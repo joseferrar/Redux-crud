@@ -34,7 +34,6 @@ function TestModal(props) {
       flag: yup.string().required("Flag is required"),
     }),
     onSubmit: async (data) => {
-      console.log(data);
       dispatch(AddCountry(data));
       dispatch(getCountry());
       window.location.reload();
