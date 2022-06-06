@@ -17,6 +17,9 @@ app.get("/", (req, res) => {
 const countryRoute = require("./routes/country");
 app.use("/api", countryRoute);
 
+const authRoute = require("./routes/auth");
+app.use("/api", authRoute);
+
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
